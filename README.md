@@ -7,8 +7,8 @@ Bu proje, emlakjet.com sitesinden günlük kiralık konut ilanlarının verileri
 ## Özellikler
 
 - **Veri Çekme:** Emlakjet sitesinden günlük kiralık konut ilanlarını çekme.
-- **Veri İşleme:** Çekilen verilerin marshmallow ile işlenmesi ve düzenlenmesi. (henüz tamamlanmadı)
-- **Redis Entegrasyonu:** Redis ile verileri önbellekleme ve veri tekrarının kayıt edilmemesi. (henüz tamamlanmadı)
+- **Veri İşleme:** Çekilen verilerin marshmallow ile işlenmesi ve düzenlenmesi.
+- **Redis Entegrasyonu:** Redis ile verileri önbellekleme ve veri tekrarının kayıt edilmemesi.
 - **RabbitMQ Entegrasyonu:** İşlenen verileri RabbitMQ kuyruğuna gönderme.
 
 ## Bağımlılıklar
@@ -31,7 +31,7 @@ Bu proje, aşağıdaki Python kütüphanelerini kullanır:
 ### Çevresel Değişkenler
 
 Uygulamanın çalışması için bir `.env` dosyasına ihtiyaç vardır. `.env.a` dosyasındaki bilgileri kendinize uyarlamanız gerekmektedir. aşağıdaki örnek yapılandırmaları kullanabilirsiniz:
-
+Docker için Redis ve RabbitMq host ayarını host.docker.internal olarak değiştirebilirsiniz.
 ```env
 APP_NAME=emlakjet-web-crawler
 DOMAIN=www.emlakjet.com/gunluk-kiralik-konut
@@ -40,11 +40,11 @@ RESULT_QUEUE_NAME=result_emlakjet
 
 RABBITMQ_USER=guest
 RABBITMQ_PASSWORD=guest
-RABBITMQ_HOST=localhost
+RABBITMQ_HOST=localhost #docker için host.docker.internal
 RABBITMQ_PORT=5672
 RABBITMQ_VHOST=/
 
-REDIS_HOST=localhost
+REDIS_HOST=localhost #docker için host.docker.internal
 REDIS_PORT=6379
 REDIS_PASSWORD=
 
@@ -93,28 +93,14 @@ Uygulama yapılandırması, ortam değişkenleri kullanılarak yönetilir. Refer
 
 2. **Değişkenlerinizi ayarlamak için `.env` dosyasını düzenleyin.**
 
-## Kullanım
+## Docker
 
-1. **Uygulamayı çalıştırın:**
+Proje için Docker imajını Docker Hub'dan çekebilirsiniz:
 
-    ```sh
-    python main.py
-    ```
+```sh
+docker pull serkanglck/emlakjet_daily_crawler:v1.0
+```
 
-## Docker kullanarak çalıştırmak (henüz tamamlanmadı)
-
-
-
- **Docker ile projeyi pull etmek için:**
-
-    ```sh
-    docker pull serkanglck/emlakjet-crawler:latest
-    ```
-  **Docker ile çalıştırmak için:**
-
-    ```sh
-    docker run --env-file .env.a emlakjet-crawler
-    ```
 
 ## Loglama
 
